@@ -70,13 +70,15 @@ namespace Royal_Pizza.API.Controllers
                         val = r.ToString();
 
                     if (i == 0)
-                        tmp += @"{""Client_ID"": " + val + ",";
+                        tmp += @",{""Dessert_ID"": " + val + ",";
                     else if (i == 1)
-                        tmp += @"""Client_Name"": " + val + ",";
+                        tmp += @"""DessertName"": " + val + ",";
                     else if (i == 2)
-                        tmp += @"""Client_LastName"": " + val + ",";
+                        tmp += @"""DessertDescription"": " + val + ",";
                     else if (i == 3)
-                        tmp += @"""Client_Age"": " + val;
+                        tmp += @"""DessertPrice"": " + val + ",";
+                    else if (i == 4)
+                        tmp += @"""ImageURL"": " + val;
                 }
                 tmp += "}";
             }
@@ -116,11 +118,6 @@ namespace Royal_Pizza.API.Controllers
 
         [JsonProperty("Client_ID")]
         public int Client_ID { get; set; }
-
-    }
-
-    public partial class Pizza
-    {
 
     }
 
