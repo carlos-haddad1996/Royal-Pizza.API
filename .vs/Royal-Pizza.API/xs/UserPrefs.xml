@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{577F121C-6A11-40E1-AC5A-17C6B4A1F887}|Default">
+  <MonoDevelop.Ide.ItemProperties.Royal-Pizza.API PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/PizzaController.cs">
+    <Files>
+      <File FileName="Controllers/PizzaController.cs" Line="94" Column="1" />
+      <File FileName="Controllers/DessertsController.cs" Line="55" Column="9" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Royal-Pizza.API" expanded="True">
+            <Node name="Royal-Pizza.API" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="PizzaController.cs" selected="True" />
+              </Node>
+              <Node name="Functions" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/arturorendon/Documents/GitHub/Royal-Pizza.API/Controllers/PizzaController.cs" relfile="Controllers/PizzaController.cs" line="93" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
