@@ -6,16 +6,17 @@ using Newtonsoft.Json;
 namespace Royal_Pizza.API.Controllers
 {
     [ApiController]
-    public class PizzaController : ControllerBase
+    public class DrinksController : ControllerBase
     {
-        [Route("pizzas")]
+
+        [Route("drinks")]
         [HttpGet]
-        public ActionResult<List<Pizza>> Get()
+        public ActionResult<List<Drinks>> Get()
         {
             Database db = new Database();
             db.dbConnection.Open();
             var command = db.dbConnection.CreateCommand();
-            command.CommandText = "SELECT * FROM Pizzas";
+            command.CommandText = "SELECT * FROM Drinks";
             string tmp = "[";
             var read = command.ExecuteReader();
             var first = true;
@@ -50,17 +51,17 @@ namespace Royal_Pizza.API.Controllers
                 tmp += "}";
             }
             tmp += "]";
-            return JsonConvert.DeserializeObject<List<Pizza>>(tmp);
+            return JsonConvert.DeserializeObject<List<Drinks>>(tmp);
         }
 
-        [Route("pizza/{id}")]
+        [Route("drink/{id}")]
         [HttpGet]
-        public ActionResult<Pizza> Get(int id)
+        public ActionResult<Drinks> Get(int id)
         {
             Database db = new Database();
             db.dbConnection.Open();
             var command = db.dbConnection.CreateCommand();
-            command.CommandText = "SELECT * FROM Pizzas WHERE id = " + id.ToString() + "";
+            command.CommandText = "SELECT * FROM Drinks WHERE id = " + id.ToString() + "";
             string tmp = "";
             var read = command.ExecuteReader();
 
@@ -89,13 +90,13 @@ namespace Royal_Pizza.API.Controllers
                 tmp += "}";
             }
 
-            return JsonConvert.DeserializeObject<Pizza>(tmp);
-
+            return JsonConvert.DeserializeObject<Drinks>(tmp);
         }
+
     }
 }
 
-public partial class Pizza
+public partial class Drinks
 {
     [JsonProperty("id")]
     public int id { get; set; }

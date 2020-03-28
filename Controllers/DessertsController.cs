@@ -32,19 +32,19 @@ namespace Royal_Pizza.API.Controllers
 
                     if (first && i == 0)
                     {
-                        tmp += @"{""Dessert_ID"": " + val + ",";
+                        tmp += @"{""id"": " + val + ",";
                         first = false;
                     }
                     else if (i == 0 && !first)
-                        tmp += @",{""Dessert_ID"": " + val + ",";
+                        tmp += @",{""id"": " + val + ",";
                     else if (i == 1)
-                        tmp += @"""DessertName"": " + val + ",";
+                        tmp += @"""name"": " + val + ",";
                     else if (i == 2)
-                        tmp += @"""DessertDescription"": " + val + ",";
+                        tmp += @"""description"": " + val + ",";
                     else if (i == 3)
-                        tmp += @"""DessertPrice"": " + val + ",";
+                        tmp += @"""price"": " + val + ",";
                     else if (i == 4)
-                        tmp += @"""ImageURL"": " + val;
+                        tmp += @"""image"": " + val;
                 }
                 tmp += "}";
             }
@@ -59,7 +59,7 @@ namespace Royal_Pizza.API.Controllers
             Database db = new Database();
             db.dbConnection.Open();
             var command = db.dbConnection.CreateCommand();
-            command.CommandText = "SELECT * FROM Dessert WHERE Dessert_ID = " + id.ToString() + "";
+            command.CommandText = "SELECT * FROM Dessert WHERE id = " + id.ToString() + "";
             string tmp = "";
             var read = command.ExecuteReader();
 
@@ -75,15 +75,15 @@ namespace Royal_Pizza.API.Controllers
                         val = "\"" + r.ToString() + "\"";
 
                     if (i == 0)
-                        tmp += @"{""Dessert_ID"": " + val + ",";
+                        tmp += @"{""id"": " + val + ",";
                     else if (i == 1)
-                        tmp += @"""DessertName"": " + val + ",";
+                        tmp += @"""name"": " + val + ",";
                     else if (i == 2)
-                        tmp += @"""DessertDescription"": " + val + ",";
+                        tmp += @"""description"": " + val + ",";
                     else if (i == 3)
-                        tmp += @"""DessertPrice"": " + val + ",";
+                        tmp += @"""price"": " + val + ",";
                     else if (i == 4)
-                        tmp += @"""ImageURL"": " + val;
+                        tmp += @"""image"": " + val;
                 }
                 tmp += "}";
             }
@@ -97,19 +97,19 @@ namespace Royal_Pizza.API.Controllers
 
 public partial class Dessert
 {
-    [JsonProperty("Dessert_ID")]
-    public int Dessert_ID { get; set; }
+    [JsonProperty("id")]
+    public int id { get; set; }
 
-    [JsonProperty("DessertName")]
-    public string DessertName { get; set; }
+    [JsonProperty("name")]
+    public string name { get; set; }
 
-    [JsonProperty("DessertDescription")]
-    public string DessertDescription { get; set; }
+    [JsonProperty("description")]
+    public string description { get; set; }
 
-    [JsonProperty("DessertPrice")]
-    public double DessertPrice { get; set; }
+    [JsonProperty("price")]
+    public double price { get; set; }
 
-    [JsonProperty("ImageURL")]
-    public string ImageURL { get; set; }
+    [JsonProperty("image")]
+    public string image { get; set; }
 
 }
