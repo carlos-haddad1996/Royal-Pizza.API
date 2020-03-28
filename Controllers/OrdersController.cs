@@ -27,10 +27,7 @@ namespace Royal_Pizza.API.Controllers
                 {
                     var r = read.GetValue(i);
                     var val = "";
-                    if (i == 0 || i == 1)
-                        val = r.ToString();
-                    else
-                        val = r.ToString();
+                    val = r.ToString();
 
                     if (first && i == 0)
                     {
@@ -65,6 +62,54 @@ namespace Royal_Pizza.API.Controllers
             }
             tmp += "]";
             return JsonConvert.DeserializeObject<List<Order>>(tmp);
+        }
+
+        [Route("order/{id}")]
+        [HttpGet]
+        public ActionResult<Order> Get(int id)
+        {
+            Database db = new Database();
+            db.dbConnection.Open();
+            var command = db.dbConnection.CreateCommand();
+            command.CommandText = "SELECT * FROM Orders WHERE id = "+id.ToString();
+            string tmp = "";
+            var read = command.ExecuteReader();
+
+            while (read.Read())
+            {
+                for (int i = 0; i <= read.VisibleFieldCount - 1; i++)
+                {
+                    var r = read.GetValue(i);
+                    var val = "";
+                    val = r.ToString();
+
+                    if (i == 0)
+                        tmp += @"{""id"": " + val + ",";
+                    else if (i == 1)
+                        tmp += @"""ClientID"": " + val + ",";
+                    else if (i == 2)
+                    {
+                        val = "[" + val;
+                        val += "]";
+                        tmp += @"""pizzas"": " + val + ",";
+                    }
+                    else if (i == 3)
+                    {
+                        val = "[" + val;
+                        val += "]";
+                        tmp += @"""desserts"": " + val + ",";
+                    }
+                    else if (i == 4)
+                    {
+                        val = "[" + val;
+                        val += "]";
+                        tmp += @"""drinks"": " + val;
+                    }
+
+                }
+                tmp += "}";
+            }
+            return JsonConvert.DeserializeObject<Order>(tmp);
         }
 
     }

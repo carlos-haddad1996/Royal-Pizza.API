@@ -60,13 +60,13 @@ namespace Royal_Pizza.API.Controllers
             Database db = new Database();
             db.dbConnection.Open();
             var command = db.dbConnection.CreateCommand();
-            command.CommandText = "SELECT * FROM Users WHERE username = '"+user+"'";
+            command.CommandText = "SELECT * FROM Users WHERE username = '" + user + "'";
             string tmp = "";
             var read = command.ExecuteReader();
 
-            while(read.Read())
+            while (read.Read())
             {
-                for(int i = 0; i <= read.VisibleFieldCount-1; i++)
+                for (int i = 0; i <= read.VisibleFieldCount - 1; i++)
                 {
                     var r = read.GetValue(i);
                     var val = "";
@@ -76,12 +76,12 @@ namespace Royal_Pizza.API.Controllers
                         val = r.ToString();
 
                     if (i == 0)
-                        tmp += @"{""id"": "+val+",";
-                    else if(i == 1)
+                        tmp += @"{""id"": " + val + ",";
+                    else if (i == 1)
                         tmp += @"""username"": " + val + ",";
-                    else if(i == 2)
-                        tmp += @"""password"": "+ val + ",";
-                    else if(i == 3)
+                    else if (i == 2)
+                        tmp += @"""password"": " + val + ",";
+                    else if (i == 3)
                         tmp += @"""ClientID"": " + val;
                 }
                 tmp += "}";
@@ -114,19 +114,49 @@ namespace Royal_Pizza.API.Controllers
                     if (i == 0)
                         tmp += @"{""id"": " + val + ",";
                     else if (i == 1)
-                        tmp += @"""firstname"": " + val + ",";
+                        tmp += @"""username"": " + val + ",";
                     else if (i == 2)
-                        tmp += @"""lastname"": " + val + ",";
+                        tmp += @"""password"": " + val + ",";
                     else if (i == 3)
-                        tmp += @"""age"": " + val;
+                        tmp += @"""ClientID"": " + val;
                 }
                 tmp += "}";
             }
             return JsonConvert.DeserializeObject<Client>(tmp);
         }
 
-    }
+        [Route("user/{id}")]
+        [HttpPost]
+        public ActionResult<string> ActivateOrDeactivateSession(int id)
+        {
+            Database db = new Database();
+            db.dbConnection.Open();
+            var command = db.dbConnection.CreateCommand();
+            command.CommandText = "SELECT * FROM Users WHERE id = " + id.ToString() + "";
+            int tmp = -1;
+            var read = command.ExecuteReader();
 
+            while (read.Read())
+            {
+                tmp = Convert.ToInt32(read.GetValue(4));
+            }
+
+            if (tmp == 0)
+                tmp = 1;
+            else
+                tmp = 0;
+
+            var updtCommand = db.dbConnection.CreateCommand();
+            updtCommand.CommandText = "UPDATE Users SET Session = " + tmp + " WHERE id = " + id.ToString() + "";
+
+            updtCommand.ExecuteNonQuery();
+            
+            return "Ok";
+
+        }
+
+    }
+}
     public partial class Client
     {
         [JsonProperty("id")]
@@ -161,4 +191,3 @@ namespace Royal_Pizza.API.Controllers
 
     }
 
-}
