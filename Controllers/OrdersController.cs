@@ -112,6 +112,22 @@ namespace Royal_Pizza.API.Controllers
             return JsonConvert.DeserializeObject<Order>(tmp);
         }
 
+        [Route("order/{orderObj}")]
+        [HttpPost]
+        public ActionResult<string> PostOrder(Order orderObj)
+        {
+            Database db = new Database();
+            db.dbConnection.Open();
+            var command = db.dbConnection.CreateCommand();
+            string pizzaNum = string.Join(',', orderObj.pizzas);
+            string drinks = string.Join(',', orderObj.drinks);
+            string desserts = string.Join(',', orderObj.desserts);
+            command.CommandText = "INSERT INTO Orders(ClientID, pizzas, drinks, desserts) VALUES ("+orderObj.clientID.ToString()+", "+pizzaNum+", "+drinks+", "+desserts+")";
+            command.ExecuteNonQuery();
+
+            return "Ok";
+        }
+
     }
 }
 

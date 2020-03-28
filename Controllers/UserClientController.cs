@@ -157,7 +157,8 @@ namespace Royal_Pizza.API.Controllers
 
     }
 }
-    public partial class Client
+
+public partial class Client
     {
         [JsonProperty("id")]
         public int id { get; set; }
@@ -174,8 +175,8 @@ namespace Royal_Pizza.API.Controllers
 
     }
 
-    //[JsonProperty("secciones", NullValueHandling = NullValueHandling.Ignore)]
-    public partial class User
+//[JsonProperty("secciones", NullValueHandling = NullValueHandling.Ignore)]
+public partial class User
     {
         [JsonProperty("id")]
         public int id { get; set; }
